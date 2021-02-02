@@ -1,0 +1,15 @@
+{
+  "name": "biji",
+  "version": "1.0.0",
+  "description": "biji_houduan",
+  "main": "server.js",
+  "scripts": {
+    "start":"node server.js",
+    "server":"nodemon server.js"
+  },
+  "author": "olduath",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
