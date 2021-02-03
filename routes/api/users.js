@@ -1,6 +1,7 @@
 // 登录和注册
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 const User = require("../../models/User");
 
 // GET api/users/test
@@ -22,10 +23,19 @@ router.post("/register",(req,res)=>{
                 const newUser = new User({
                     name:req.body.name,
                     email:req.body.email,
-                    avater,
                     password:req.body.password,
                 })
+                //加密密码
+                bcrypt.genSalt(10, (err, salt)=> {
+                    bcrypt.hash(newUser.password, salt, (err, hash)=> {
+                        if(err) throw err;
+                        newUser.password = hash;
 
+                        newUser.save()
+                            .then(user=>res.json(user))
+                            .catch(err=>console.log(err));
+                    });
+                });
 
 
             }
